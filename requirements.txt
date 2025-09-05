@@ -1,0 +1,12 @@
+faiss-cpu==1.8.0.post1
+pandas>=2.1
+pyarrow>=16.0
+fastparquet>=2024.5.0
+numpy>=1.26
+sentence-transformers==2.7.0
+torch>=2.2
+fastapi>=0.111
+uvicorn[standard]>=0.30
+python-rapidjson>=1.14
+orjson>=3.10
+python-dotenv>=1.0

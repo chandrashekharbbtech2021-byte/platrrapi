@@ -1,28 +1,28 @@
-# Use a lightweight Python image
+# Use a stable lightweight Python image
 FROM python:3.10-slim
 
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies
+# Install system dependencies (for faiss & numpy)
 RUN apt-get update && apt-get install -y \
     git \
+    build-essential \
+    libopenblas-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy dependency file first
+# Copy requirements first
 COPY requirements.txt .
 
 # Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the app
+# Copy the rest of the project
 COPY . .
 
-# Railway uses $PORT environment variable
-ENV PORT=10000
+# Expose port (Railway injects $PORT)
+EXPOSE 8000
 
-# Expose the port (optional, but good practice)
-EXPOSE $PORT
-
-# Run the FastAPI app using Uvicorn
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "10000"]
+# Run FastAPI with Uvicorn, using Railway’s $PORT
+CMD ["sh", "-c", "uvicorn app:app --host 0.0.0.0 --port ${PORT:-8000}"]

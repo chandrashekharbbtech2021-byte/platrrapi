@@ -1,25 +1,13 @@
 faiss-cpu==1.8.0.post1
-numpy>=1.26
-
-# Data handling
 pandas>=2.1
 pyarrow>=16.0
 fastparquet>=2024.5.0
-
-# ML / Embeddings
-torch>=2.2
+numpy>=1.26
 sentence-transformers==2.7.0
-
-# API framework
+torch>=2.2
 fastapi>=0.111
 uvicorn[standard]>=0.30
-
-# JSON performance
 python-rapidjson>=1.14
 orjson>=3.10
-
-# Environment variables
 python-dotenv>=1.0
-
-# Hugging Face Hub
-huggingface-hub>=0.24.0
+huggingface-hub>=0.23
